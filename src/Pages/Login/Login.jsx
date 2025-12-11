@@ -79,7 +79,8 @@ const handleTogglePasswordShow = (event) => {
         <div className='max-w-11/12 mx-auto flex justify-center mt-10 pb-20'>
             <div className="card  w-full max-w-sm shrink-0 shadow-2xl py-5 bg-[#edf8e9]">
                   <h2 className='font-bold text-2xl text-center 
-                  bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] bg-clip-text text-transparent'>Welcome Back!</h2>
+                  bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] bg-clip-text text-transparent'>
+                    Welcome Back!</h2>
                   <p className='text-center text-gray-800 mt-2'>Please enter your details to login.</p>
                   
             <form onSubmit={handleLogin}
