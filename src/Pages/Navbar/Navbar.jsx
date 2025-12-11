@@ -25,7 +25,7 @@ const Navbar = () => {
 
     return (
         <div>
-            <div className='bg-gray-100 shadow-sm'>
+            <div className='bg-gray-50 shadow-sm fixed top-0 left-0 w-full z-50'>
             <div className="navbar max-w-11/12 mx-auto">
 
                 <div className="navbar-start">
@@ -40,13 +40,13 @@ const Navbar = () => {
                     <NavLink to='/' >Home</NavLink>
                 </li>
                 <li>
-                    <NavLink to='/availableFoods' >All Product</NavLink>
+                    <NavLink to='/allProducts' >All Product</NavLink>
                 </li>
                 <li>
-                    <NavLink to='/availableFoods' >About Us</NavLink>
+                    <NavLink to='/aboutUs' >About Us</NavLink>
                 </li>
                 <li>
-                    <NavLink to='/availableFoods' >Contact</NavLink>
+                    <NavLink to='/contact' >Contact</NavLink>
                 </li>
                 
         </ul>
@@ -84,13 +84,13 @@ const Navbar = () => {
                             <NavLink to='/' >Home</NavLink>
                         </li>
                         <li>
-                    <NavLink to='/availableFoods' >All Product</NavLink>
+                    <NavLink to='/allProducts' >All Product</NavLink>
                 </li>
                 <li>
-                    <NavLink to='/availableFoods' >About Us</NavLink>
+                    <NavLink to='/aboutUs' >About Us</NavLink>
                 </li>
                 <li>
-                    <NavLink to='/availableFoods' >Contact</NavLink>
+                    <NavLink to='/contact' >Contact</NavLink>
                 </li>
                     
                     </ul>
