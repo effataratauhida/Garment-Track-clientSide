@@ -78,6 +78,59 @@ const feedbacks = [
     const nextSlide = () => {
         setCurrent((prev) => (prev + 1) % length);
     };
+    const faqs = [
+  {
+    q: "What is this system used for?",
+    a: "It helps garment factories manage buyer orders, production stages, and timely delivery.",
+  },
+  {
+    q: "Do I need technical skills to use it?",
+    a: "No, the system is beginner-friendly and easy for factory staff to use.",
+  },
+  {
+    q: "Can I track every production stage?",
+    a: "Yes, you can track Cutting, Sewing, Finishing, QC, and Delivery in real-time.",
+  },
+  {
+    q: "Does it support multiple buyers and orders?",
+    a: "Yes, you can manage unlimited buyers, orders, and production batches.",
+  },
+  {
+    q: "Is my factory data secure?",
+    a: "Yes, all data is protected with modern authentication and security layers.",
+  },
+    ];
+    const [openIndex, setOpenIndex] = useState(null);
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+    const benefits = [
+    {
+      title: "Faster Production Updates",
+      desc: "Get real-time progress from cutting to delivery with zero delays.",
+    },
+    {
+      title: "Reduce Delays & Miscommunication",
+      desc: "Track every order in one place and avoid production bottlenecks.",
+    },
+    {
+      title: "Zero Manual Errors",
+      desc: "Automated tracking removes Excel mistakes and boosts accuracy.",
+    },
+    {
+      title: "Centralized Data System",
+      desc: "Buyers, orders, production, and inventory—everything stays organized.",
+    },
+    {
+      title: "Access From Anywhere",
+      desc: "Use the system from mobile, tablet, or desktop—anytime.",
+    },
+    {
+      title: "Improve On-Time Delivery",
+      desc: "Stay ahead with timely stage updates and instant notifications.",
+    },
+  ];
 
     return (
         <div>
@@ -107,7 +160,7 @@ const feedbacks = [
             </div>
 
             {/* how it works */}
-            <section className="bg-white py-12 md:py-14">
+            <section className="mt-16 ">
                 <div className="max-w-11/12 mx-auto px-6">
         
                     <div className="max-w-2xl mx-auto text-center mb-8">
@@ -159,7 +212,7 @@ const feedbacks = [
             </section>
 
             {/*customer feedback  */}
-            <section className="py-16 ">
+            <section className="mt-16  ">
                 <div className="max-w-11/12 mx-auto px-6">
                     <h2 className="text-center text-2xl md:text-4xl font-extrabold 
                     bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] bg-clip-text text-transparent">
@@ -204,6 +257,60 @@ const feedbacks = [
                 </div>
                 </div>
             </section>
+
+            {/* frequently asked question */}
+
+                <section className="mt-16  ">
+                  <div className="max-w-11/12 mx-auto px-6">
+                    <h2 className="text-center text-2xl md:text-4xl font-extrabold 
+                    bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] bg-clip-text text-transparent mb-8">
+                      Frequently Asked Questions
+                    </h2>
+            
+                    {faqs.map((item, index) => (
+                      <div
+                        key={index}
+                        className="border-b border-gray-300 py-4 cursor-pointer max-w-3xl mx-auto"
+                        onClick={() => toggleFAQ(index)}
+                      >
+                        <div className="flex justify-between items-center">
+                          <h3 className="text-lg font-medium">{item.q}</h3>
+                          <span className="text-xl">
+                            {openIndex === index ? "−" : "+"}
+                          </span>
+                        </div>
+            
+                        {openIndex === index && (
+                          <p className="mt-2 text-gray-600">{item.a}</p>
+                    )}
+                    </div>
+                    ))}
+                </div>
+               </section>
+
+               {/* why choose us */}
+
+               <section className="pt-16 bg-red-400 ">
+      <div className="max-w-11/12 mx-auto px-6">
+        <h2 className="text-center text-2xl md:text-4xl font-extrabold 
+                    bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] bg-clip-text text-transparent mb-10">
+          Why Choose Our System?
+        </h2>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {benefits.map((item, index) => (
+            <div
+              key={index}
+              className="p-6 bg-gray-50 rounded-xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all"
+            >
+              <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+              <p className="text-gray-600">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
 
         </div>
     );

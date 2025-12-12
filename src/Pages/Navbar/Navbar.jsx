@@ -6,6 +6,8 @@ import '../Navbar/Navbar.css'
 import toast from 'react-hot-toast';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 
+import { HiOutlineHome, HiScissors } from 'react-icons/hi';
+
 
 const Navbar = () => {
 
@@ -51,7 +53,8 @@ const Navbar = () => {
                 
         </ul>
                     </div>
-                    <Link to='/' className="flex items-center gap-1 hover:scale-105 ">
+                    <Link to='/' className="flex items-center  hover:scale-105 ">
+                    <HiScissors className='h-7 w-7' />
                     <h2 className='text-gray-800 font-bold text-2xl'>
                      Garment<span className='text-[#F83600]'>Track</span>
                     </h2>
@@ -80,8 +83,10 @@ const Navbar = () => {
                 <div className="navbar-end gap-3">
 
                             <ul className="items-center gap-8 hidden lg:flex">
-                        <li >
-                            <NavLink to='/' >Home</NavLink>
+                        <li  >
+                            
+                            <NavLink to='/'
+                             >Home</NavLink>
                         </li>
                         <li>
                     <NavLink to='/allProducts' >All Product</NavLink>

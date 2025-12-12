@@ -1,0 +1,210 @@
+[
+  {
+    "_id": "1",
+    "name": "Men's Denim Jacket",
+    "description": "Classic men’s denim jacket, perfect for casual wear.",
+    "category": "Jacket",
+    "price": 45,
+    "availableQuantity": 120,
+    "minimumOrderQuantity": 5,
+    "images": [
+      "https://i.postimg.cc/63Cn0Vj0/Denim-jacket.jpg",
+      "https://i.postimg.cc/T1Cy7trN/Men-s-Spring-And-Autumn-Loose-Casual-Long-Sleeve-Denim-Jacket.jpg"
+    ],
+    "demoVideo": "https://example.com/videos/denim-demo.mp4",
+    "paymentOptions": ["Cash on Delivery", "PayFirst"],
+    "showOnHome": true,
+    "createdBy": "Manager1"
+  },
+  {
+    "_id": "2",
+    "name": "Women's Hoodie",
+    "description": "Soft and warm hoodie for women, available in multiple colors.",
+    "category": "Hoodie",
+    "price": 30,
+    "availableQuantity": 200,
+    "minimumOrderQuantity": 3,
+    "images": [
+      "https://example.com/images/hoodie1.jpg",
+      "https://example.com/images/hoodie2.jpg"
+    ],
+    "demoVideo": "",
+    "paymentOptions": ["Cash on Delivery", "PayFirst"],
+    "showOnHome": true,
+    "createdBy": "Manager1"
+  },
+  {
+    "_id": "3",
+    "name": "Kids T-Shirt",
+    "description": "High-quality cotton t-shirts for kids, comfortable and durable.",
+    "category": "T-Shirt",
+    "price": 12,
+    "availableQuantity": 500,
+    "minimumOrderQuantity": 10,
+    "images": [
+      "https://example.com/images/kids1.jpg",
+      "https://example.com/images/kids2.jpg"
+    ],
+    "demoVideo": "",
+    "paymentOptions": ["Cash on Delivery"],
+    "showOnHome": true,
+    "createdBy": "Manager2"
+  },
+  {
+    "_id": "4",
+    "name": "Formal Shirt Men",
+    "description": "Elegant formal shirt suitable for office and events.",
+    "category": "Shirt",
+    "price": 25,
+    "availableQuantity": 150,
+    "minimumOrderQuantity": 5,
+    "images": [
+      "https://example.com/images/shirt1.jpg",
+      "https://example.com/images/shirt2.jpg"
+    ],
+    "demoVideo": "",
+    "paymentOptions": ["Cash on Delivery", "PayFirst"],
+    "showOnHome": false,
+    "createdBy": "Manager2"
+  },
+  {
+    "_id": "5",
+    "name": "Casual Pants",
+    "description": "Comfortable casual pants for men and women.",
+    "category": "Pants",
+    "price": 28,
+    "availableQuantity": 180,
+    "minimumOrderQuantity": 3,
+    "images": [
+      "https://example.com/images/pants1.jpg",
+      "https://example.com/images/pants2.jpg"
+    ],
+    "demoVideo": "",
+    "paymentOptions": ["Cash on Delivery"],
+    "showOnHome": false,
+    "createdBy": "Manager1"
+  },
+  {
+    "_id": "6",
+    "name": "Winter Coat",
+    "description": "Warm and stylish winter coat for men and women.",
+    "category": "Coat",
+    "price": 70,
+    "availableQuantity": 80,
+    "minimumOrderQuantity": 2,
+    "images": [
+      "https://example.com/images/coat1.jpg",
+      "https://example.com/images/coat2.jpg"
+    ],
+    "demoVideo": "",
+    "paymentOptions": ["PayFirst"],
+    "showOnHome": true,
+    "createdBy": "Manager1"
+  },
+  {
+    "_id": "7",
+    "name": "Sports Shorts",
+    "description": "Lightweight sports shorts for running and gym.",
+    "category": "Shorts",
+    "price": 15,
+    "availableQuantity": 300,
+    "minimumOrderQuantity": 5,
+    "images": [
+      "https://example.com/images/shorts1.jpg",
+      "https://example.com/images/shorts2.jpg"
+    ],
+    "demoVideo": "",
+    "paymentOptions": ["Cash on Delivery"],
+    "showOnHome": true,
+    "createdBy": "Manager2"
+  },
+  {
+    "_id": "8",
+    "name": "Leather Jacket",
+    "description": "Premium leather jacket, stylish and durable.",
+    "category": "Jacket",
+    "price": 120,
+    "availableQuantity": 50,
+    "minimumOrderQuantity": 1,
+    "images": [
+      "https://example.com/images/leather1.jpg",
+      "https://example.com/images/leather2.jpg"
+    ],
+    "demoVideo": "https://example.com/videos/leather-demo.mp4",
+    "paymentOptions": ["PayFirst"],
+    "showOnHome": false,
+    "createdBy": "Manager2"
+  },
+  {
+    "_id": "9",
+    "name": "Summer Dress",
+    "description": "Light and colorful summer dresses for women.",
+    "category": "Dress",
+    "price": 35,
+    "availableQuantity": 100,
+    "minimumOrderQuantity": 2,
+    "images": [
+      "https://example.com/images/dress1.jpg",
+      "https://example.com/images/dress2.jpg"
+    ],
+    "demoVideo": "",
+    "paymentOptions": ["Cash on Delivery", "PayFirst"],
+    "showOnHome": true,
+    "createdBy": "Manager1"
+  },
+  {
+    "_id": "10",
+    "name": "Kids Shorts",
+    "description": "Comfortable shorts for kids, perfect for playtime.",
+    "category": "Shorts",
+    "price": 10,
+    "availableQuantity": 250,
+    "minimumOrderQuantity": 5,
+    "images": [
+      "https://example.com/images/kidshorts1.jpg",
+      "https://example.com/images/kidshorts2.jpg"
+    ],
+    "demoVideo": "",
+    "paymentOptions": ["Cash on Delivery"],
+    "showOnHome": false,
+    "createdBy": "Manager2"
+  },
+  {
+    "_id": "11",
+    "name": "Winter Sweater",
+    "description": "Cozy sweaters for winter, available in multiple colors.",
+    "category": "Sweater",
+    "price": 40,
+    "availableQuantity": 90,
+    "minimumOrderQuantity": 2,
+    "images": [
+      "https://example.com/images/sweater1.jpg",
+      "https://example.com/images/sweater2.jpg"
+    ],
+    "demoVideo": "",
+    "paymentOptions": ["Cash on Delivery", "PayFirst"],
+    "showOnHome": true,
+    "createdBy": "Manager1"
+  },
+  {
+    "_id": "12",
+    "name": "Men's T-Shirt Pack",
+    "description": "Pack of 3 men’s t-shirts, soft cotton material.",
+    "category": "T-Shirt",
+    "price": 20,
+    "availableQuantity": 150,
+    "minimumOrderQuantity": 3,
+    "images": [
+      "https://example.com/images/mens-tshirt1.jpg",
+      "https://example.com/images/mens-tshirt2.jpg"
+    ],
+    "demoVideo": "",
+    "paymentOptions": ["Cash on Delivery"],
+    "showOnHome": true,
+    "createdBy": "Manager2"
+  
+
+
+
+  }
+]
