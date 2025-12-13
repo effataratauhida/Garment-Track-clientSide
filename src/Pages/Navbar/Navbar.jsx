@@ -103,7 +103,8 @@ const Navbar = () => {
                         to="/login" 
                          
                         className='py-1 px-3 sm:py-2 sm:px-6   cursor-pointer 
-                        rounded-sm font-semibold text-sm sm:text-base bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] hover:bg-transparent
+                        rounded-sm font-semibold text-sm sm:text-base 
+                        bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] hover:bg-transparent
                            hover:scale-110
                         text-white  
                         '>
