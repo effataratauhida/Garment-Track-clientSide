@@ -6,7 +6,7 @@ const AllProducts = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/data/products.json")
+    fetch("http://localhost:5000/productsData")
       .then(res => res.json())
       .then(data => {
         setProducts(data);
@@ -23,7 +23,7 @@ const AllProducts = () => {
   }
 
   return (
-    <section className="pt-24  min-h-screen">
+    <section className="pt-24  ">
       <div className="max-w-11/12 mx-auto px-5">
         {/* Section Title */}
         <h2 className="text-2xl md:text-4xl font-extrabold text-center
@@ -74,7 +74,7 @@ const AllProducts = () => {
 
                 {/* View Details Button */}
                 <Link
-                  to={`/product/${product._id}`}
+                  to={`/productDetails/${product._id}`}
                   className="block text-center w-full py-2 rounded-md font-semibold bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))]
                    text-white hover:scale-105 transition"
                 >

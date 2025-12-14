@@ -6,6 +6,7 @@ import Registration from "../Pages/Register/Register";
 import AllProducts from "../Pages/AllProducts/AllProducts";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import Contact from "../Pages/Contact/Contact";
+import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
         {
             path: '/register',
             Component: Registration
+        },
+        {
+            path: '/productDetails/:id',
+            Component: ProductDetails
         }
     ]
   },

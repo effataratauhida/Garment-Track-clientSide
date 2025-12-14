@@ -132,6 +132,29 @@ const feedbacks = [
     },
   ];
 
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+    fetch("http://localhost:5000/productsData/limit")
+      .then(res => res.json())
+      .then(data => {
+        //console.log("Products:", data);
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center mt-20 min-h-32">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
+
+
     return (
         <div>
             {/* hero section */}
@@ -158,6 +181,53 @@ const feedbacks = [
                         View All Products <FaArrowUpRightFromSquare/> </Link>
                 </div>
             </div>
+
+            {/* our products */}
+
+            <section className='mt-16'>
+              <div className='max-w-11/12 mx-auto'>
+                <h3 className="text-2xl text-center md:text-4xl font-extrabold
+                    bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] bg-clip-text text-transparent">
+                      Our Products
+                </h3>
+              
+              
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {products.map(product => (
+            <div
+              key={product._id}
+              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:-translate-y-1"
+            >
+              <div className="relative">
+                <img
+                  src={product.images[0]}
+                  alt={product.name}
+                  className="w-full h-56 object-cover brightness-90"
+                />
+              </div>
+
+              <div className="p-4">
+                <h3 className="text-lg font-semibold mb-1">{product.name}</h3>
+                <p className="text-sm text-gray-600 mb-2">
+                  {product.shortDescription}
+                </p>
+                <p className="text-gray-800 font-bold mb-3">${product.price}</p>
+
+                <Link
+                  to={`/productDetails/${product._id}`}
+                  className="block text-center bg-[#F83600] hover:bg-[#fdb423] text-white font-semibold py-2 rounded-md transition-colors"
+                >
+                  View Details
+                </Link>
+              </div>
+            </div>
+           
+          ))}
+
+
+             </div>       
+              </div>
+            </section>
 
             {/* how it works */}
             <section className="mt-16 ">
