@@ -64,9 +64,8 @@ const AllProducts = () => {
                 </p>
 
                 <div className="flex justify-between items-center mb-3">
-                  <span className="text-gray-800 font-bold text-lg">
-                    ${product.price}
-                  </span>
+                  <p className="text-sm text-gray-600  mb-3">Price: <span className='text-gray-800 font-bold text-lg'>
+                  ${product.price}</span></p>
                   <span className="text-sm text-gray-500">
                     Available Quantity: {product.availableQuantity}
                   </span>

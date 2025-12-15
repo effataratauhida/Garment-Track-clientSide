@@ -184,7 +184,7 @@ const feedbacks = [
 
             {/* our products */}
 
-            <section className='mt-16'>
+            <section className='mt-14'>
               <div className='max-w-11/12 mx-auto'>
                 <h3 className="text-2xl text-center md:text-4xl font-extrabold
                     bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] bg-clip-text text-transparent">
@@ -192,7 +192,7 @@ const feedbacks = [
                 </h3>
               
               
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
           {products.map(product => (
             <div
               key={product._id}
@@ -202,7 +202,7 @@ const feedbacks = [
                 <img
                   src={product.images[0]}
                   alt={product.name}
-                  className="w-full h-56 object-cover brightness-90"
+                  className="max-h-96 w-full  brightness-90"
                 />
               </div>
 
@@ -211,11 +211,13 @@ const feedbacks = [
                 <p className="text-sm text-gray-600 mb-2">
                   {product.shortDescription}
                 </p>
-                <p className="text-gray-800 font-bold mb-3">${product.price}</p>
+                <p className="text-sm text-gray-600  mb-3">Price: <span className='text-gray-800 font-bold text-lg'>
+                  ${product.price}</span></p>
 
                 <Link
                   to={`/productDetails/${product._id}`}
-                  className="block text-center bg-[#F83600] hover:bg-[#fdb423] text-white font-semibold py-2 rounded-md transition-colors"
+                  className="block text-center bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))]
+                  hover:scale-105 text-white font-semibold py-2 rounded-md "
                 >
                   View Details
                 </Link>
