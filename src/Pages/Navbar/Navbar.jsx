@@ -13,6 +13,7 @@ const Navbar = () => {
 
     const { user, signOutUser } = useContext(AuthContext); 
     const [dropdownOpen, setDropdownOpen] = useState(false);
+     const [open, setOpen] = useState(false);
       const navigate = useNavigate();
 
     const handleLogout = () => { 
@@ -24,6 +25,13 @@ const Navbar = () => {
         .catch(err => 
             console.log(err));
     };
+
+    const navLinks = (
+    <>
+      <li><NavLink to="/">Home</NavLink></li>
+      <li><NavLink to="/allProducts">All Products</NavLink></li>
+    </>
+  );
 
     return (
         <div>
@@ -82,44 +90,75 @@ const Navbar = () => {
 
                 <div className="navbar-end gap-3">
 
-                            <ul className="items-center gap-8 hidden lg:flex">
-                        <li  >
-                            
-                            <NavLink to='/'
-                             >Home</NavLink>
-                        </li>
-                        <li>
-                    <NavLink to='/allProducts' >All Product</NavLink>
-                </li>
-                <li>
-                    <NavLink to='/aboutUs' >About Us</NavLink>
-                </li>
-                <li>
-                    <NavLink to='/contact' >Contact</NavLink>
-                </li>
-                    
+                    <ul className="items-center gap-8 hidden lg:flex">
+                       
+                        {navLinks}
+                        {!user && (
+                            <>
+                                <li><NavLink to='/aboutUs' >About Us</NavLink></li>
+                                <li><NavLink to='/contact' >Contact</NavLink></li>
+                            </>
+                        )}
+                        {user && (
+                            <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+                        )}
                     </ul>
-                     <Link
-                        to="/login" 
-                         
-                        className='py-1 px-3 sm:py-2 sm:px-6   cursor-pointer 
-                        rounded-sm font-semibold text-sm sm:text-base 
-                        bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] hover:bg-transparent
-                           hover:scale-110
-                        text-white  
-                        '>
-                         Login
-                    </Link>
-                     <Link
-                        to="/register" 
-                        className='py-1 px-3   sm:py-2 sm:px-6  cursor-pointer 
-                        rounded-sm font-semibold text-sm sm:text-base  
-                        border-[#F83600] hover:border-[#F83600] border-2 hover:scale-110
-                        text-[#F83600] 
-                        '>
-                         Register
-                    </Link>
+
+                    {/* before login */}
+                    {!user && (
+                        <>
+                            <Link
+                                to="/login" 
+                                className='py-1 px-3 sm:py-2 sm:px-6   cursor-pointer 
+                                rounded-sm font-semibold text-sm sm:text-base 
+                                bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] hover:bg-transparent
+                                hover:scale-110 text-white'>Login
+                            </Link>
+                            <Link
+                                to="/register" 
+                                className='py-1 px-3   sm:py-2 sm:px-6  cursor-pointer 
+                                rounded-sm font-semibold text-sm sm:text-base  
+                                border-[#F83600] hover:border-[#F83600] border-2 hover:scale-110
+                                text-[#F83600]'>Register
+                            </Link>
+                        </>
+                    )}
                     
+                   {/* After Login */}
+{user && (
+  <div className="flex items-center gap-3">
+
+    {/* User Avatar */}
+    <div className="w-10 h-10 rounded-full overflow-hidden border">
+      {
+        user.photoURL
+          ? (
+            <img
+              src={user.photoURL}
+              alt="user"
+              className="w-full h-full object-cover"
+            />
+          )
+          : (
+            <FcBusinessman size={32} />
+          )
+      }
+    </div>
+
+    {/* Logout Button */}
+    <button
+      onClick={handleLogout}
+      className="'py-1 px-3 sm:py-2 sm:px-6   cursor-pointer 
+                                rounded-sm font-semibold text-sm sm:text-base 
+                                bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] hover:bg-transparent
+                                hover:scale-110 text-white"
+    >
+      Logout
+    </button>
+
+  </div>
+)}
+
                 </div>
             </div>
         </div>

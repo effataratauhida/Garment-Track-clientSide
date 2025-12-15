@@ -1,222 +1,177 @@
-import React, {  useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { Eye, EyeOff } from 'lucide-react';
-import { getAuth, GoogleAuthProvider, sendEmailVerification, signInWithPopup, updateProfile } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithPopup, updateProfile } from 'firebase/auth';
 import app from '../../firebase/firebase.config';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 
-
 const Registration = () => {
 
-  const { createUser, setUser} = useContext(AuthContext);
-  const [regSuccess, setRegSuccess] = useState(false);
-  const [error, setError] = useState('');
+  const { createUser, setUser } = useContext(AuthContext);
   const [showPass, setShowPass] = useState(false);
+  const [photoURL, setPhotoURL] = useState("");
+  const [role, setRole] = useState("buyer");
   const navigate = useNavigate();
+
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
   useEffect(() => {
-        if (regSuccess) {
-            toast.success("Account created successfully!");
-            setRegSuccess(false); 
-            // navigate('/');
-            setTimeout(() => {
-            navigate('/');;
-          }, 1500);
-        } 
-  }, [regSuccess, navigate]);
+    document.title = "Register | Garments Tracker";
+  }, []);
 
+  // 🔐 Email & Password Register
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const form = e.target;
 
-    const handleRegister = (e) => {
-        e.preventDefault();
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const terms = form.terms.checked;
 
-    
-        const form = e.target;
-        const name = form.name.value;
-        const photo = form.photo.value;
-        const email = form.email.value;
-        const password = form.password.value;
-        const terms = form.terms.checked;
-
-        const lengthPattern = /^.{6,}$/;
-        const casePattern = /^(?=.*[a-z])(?=.*[A-Z]).+$/;
-        const specialCharPattern = /^(?=.*[!@#$%^&*(),.?:{}|<>|]).+$/;
-
-         if(!lengthPattern.test(password)){
-            
-            setError('Password must be 6 character or longer!');
-            return;
-        }
-        else if (!casePattern.test(password)){
-            setError('Password must have one uppercase and one lowercase character!');
-            return;
-        }
-        else if (!specialCharPattern.test(password)){
-            setError('Password must contain at least one special character(e.g. ! @ # $ % ^ & *).');
-            return;
-        }
-
-         setError('')
-
-        if(!terms){
-            setError('Please accept out terms and conditions!');
-            return
-        }
-
-
-        createUser(email, password)
-        .then(result => {
-            const user = result.user;
-            //console.log(user);
-            //setUser(user);
-            //setRegSuccess(true);
-            //form.reset();
-
-            //update user profile
-            const profile = {
-              displayName: name,
-              photoURL: photo,
-            }
-            updateProfile(user, profile)
-            .then(() => {
-                setUser({...user, 
-                    displayName: name,
-                    photoURL: photo
-                });
-                setRegSuccess(true);
-                 setTimeout(() => {
-                     navigate('/');
-                     }, 1500);
-            })
-            })
-        //     .catch()
-
-        //     //send verification email
-        //     // sendEmailVerification(user)
-        //     // .then(() => {
-        //     //     toast('Please verify your email address')
-        //     // })
-        
-        // })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            setError(errorMessage);
-        })
-  };
-
-  const handleTogglePasswordShow = (event) => {
-            event.preventDefault();
-            setShowPass (!showPass);
+    // Password Validation (As per assignment)
+    if (!/^.{6,}$/.test(password)) {
+      return toast.error("Password must be at least 6 characters");
+    }
+    if (!/(?=.*[a-z])(?=.*[A-Z])/.test(password)) {
+      return toast.error("Password must contain uppercase & lowercase letters");
+    }
+    if (!terms) {
+      return toast.error("Please accept terms & conditions");
     }
 
+    try {
+      const result = await createUser(email, password);
+      const user = result.user;
 
+      await updateProfile(user, {
+        displayName: name,
+        photoURL: photoURL
+      });
 
-      //  Google login
-  const handleGoogleLogin = async () => {
-        try {
-          const result = await signInWithPopup(auth, provider);
-          setUser(result.user);
-          toast.success('Logged in with Google!');
-          navigate('/');
-        } 
-        catch (error) {
-          toast.error(error.message);
-        }
+      setUser({ ...user, displayName: name, photoURL });
+
+      // Save user to DB
+      await fetch(`${import.meta.env.VITE_API_URL}/users`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          photoURL,
+          role,
+          status: "pending"
+        })
+      });
+
+      toast.success("Account created successfully!");
+      form.reset();
+      navigate("/");
+
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
+  // 🔵 Google Login
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      setUser(user);
 
+      // Save Google user
+      await fetch(`${import.meta.env.VITE_API_URL}/users`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          role: "buyer",
+          status: "pending"
+        })
+      });
 
-    return (
-        <div>
-            <title>Registration</title>
+      toast.success("Logged in with Google!");
+      navigate("/");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
-            <div className='max-w-11/12 mx-auto flex justify-center mt-10 pb-20 '>
-                <div className="card bg-[#edf8e9] w-full max-w-sm shrink-0 shadow-2xl py-5">
-                    <h2 className='font-bold text-2xl text-center bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] bg-clip-text text-transparent'>Register Your Account</h2>
+  return (
+    <div className='max-w-11/12 mx-auto flex justify-center mt-16 pb-20'>
+      <div className="card bg-[#edf8e9] w-full max-w-sm shadow-2xl py-6">
+        <h2 className='font-bold text-2xl text-center bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent'>
+          Register Your Account
+        </h2>
 
-                    <form onSubmit={handleRegister}
-                    className="card-body">
-                        <fieldset className="fieldset">
+        <form onSubmit={handleRegister} className="card-body">
 
-                            
-            {/* Name */}
-            <label className="label">Name</label>
-            <input 
-            name='name' 
-            type="text" 
-            className="input" 
-            placeholder="Name"
-            required /> 
+          <label>Name</label>
+          <input name="name" className="input" required />
 
-            {/* Email */}
-          <label className="label">Email</label>
-          <input name='email' type="email" className="input" placeholder="Email" 
-          required/>
+          <label>Email</label>
+          <input name="email" type="email" className="input" required />
 
-            {/* Photo URL */}
-            <label className="label">Photo URL</label>
-            <input 
-            name='photo' 
-            type="text" 
-            className="input" 
-            placeholder="Photo URL" 
-            required/>
+          <label>Photo URL</label>
+          <input
+            value={photoURL}
+            onChange={(e) => setPhotoURL(e.target.value)}
+            className="input"
+          />
 
-             {/* Password */}
+          <label>Role</label>
+          <select value={role} onChange={(e) => setRole(e.target.value)} className="input">
+            <option value="buyer">Buyer</option>
+            <option value="manager">Manager</option>
+          </select>
 
-        <label className="label">Password</label>
-          <div className='relative'>
-            <input 
-              type={showPass ? 'text' : 'password'} 
-              name='password' 
-              className="input" 
-              placeholder="Password"
-              required />
-            <button 
-              onClick={handleTogglePasswordShow}
-              className="btn btn-xs absolute top-2 right-7"> 
-               {showPass 
-              ? <EyeOff size={16} strokeWidth={1} /> 
-              : <Eye size={16} strokeWidth={1} />} 
+          <label>Password</label>
+          <div className="relative">
+            <input
+              type={showPass ? "text" : "password"}
+              name="password"
+              className="input"
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowPass(!showPass)}
+              className="absolute top-2 right-4"
+            >
+              {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
             </button>
-            </div>
+          </div>
 
-             {/* terms & conditions */}
-          <label class="label" className='mt-2 text-gray-800'>
-            <input type="checkbox" 
-            class="checkbox"  name="terms" id="" />
-            Accept our terms and conditions
+          <label className="flex gap-2 mt-2">
+            <input type="checkbox" name="terms" />
+            Accept terms & conditions
           </label>
 
-          <button type='submit'
-                className="btn mt-4 bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] hover:scale-105
-                        text-white text-base">
-            Register</button>
+          <button className="btn mt-4 bg-gradient-to-r from-orange-500 to-yellow-400 text-white">
+            Register
+          </button>
 
+          <button type="button" onClick={handleGoogleLogin} className="btn mt-3">
+            <FcGoogle size={22} /> Continue with Google
+          </button>
 
-            <p className='text-center text-[#304c77] text-base font-medium mt-2'>or,</p>
+          <p className="text-center mt-3">
+            Already have an account?
+            <Link to="/login" className='text-red-600 underline'>
+              Login
+            </Link>
+          </p>
 
-          <button 
-          onClick={handleGoogleLogin}
-          className='btn mt-2 w-full px-4 py-3'><FcGoogle size={24} />
-          Continue with Google</button>
-
-          <p className='text-center text-gray-800 text-base font-medium mt-2'>Already have an account?{" "} <Link to='/login' className='text-red-600 underline '>Please Login</Link></p>
-        
-        </fieldset>
-
-        {
-           error && <p className='text-red-500'>{error}</p>
-        }
-                    </form>
-                </div>
-            </div>
-        </div>
-    );
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default Registration;
