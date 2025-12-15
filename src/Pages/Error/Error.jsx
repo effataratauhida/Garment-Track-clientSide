@@ -24,8 +24,7 @@ const Error = () => {
                 onClick={handleGoBack}
                 className='mt-4 py-4 px-10
                 cursor-pointer rounded-sm font-semibold text-base
-                text-white hover:text-[#005a32] bg-[#238b45] hover:bg-transparent
-                border-[#238b45] hover:border-2 hover:border-[#005a32] hover:scale-110  
+                text-white bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] hover:scale-110  
                 '>Go Back!
                 </button>
                 
