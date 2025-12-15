@@ -27,7 +27,8 @@ const AllProducts = () => {
       <div className="max-w-11/12 mx-auto px-5">
         {/* Section Title */}
         <h2 className="text-2xl md:text-4xl font-extrabold text-center
-        bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] bg-clip-text text-transparent mb-12">
+        bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] 
+        bg-clip-text text-transparent mb-12">
           All Products
         </h2>
 
