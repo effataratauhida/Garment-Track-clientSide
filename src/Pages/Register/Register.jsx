@@ -7,6 +7,8 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, updateProfile } from 'fir
 import app from '../../firebase/firebase.config';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 
+
+
 const Registration = () => {
 
   const { createUser, setUser } = useContext(AuthContext);
@@ -22,7 +24,7 @@ const Registration = () => {
     document.title = "Register | Garments Tracker";
   }, []);
 
-  // 🔐 Email & Password Register
+  //  Email & Password Register
   const handleRegister = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -32,7 +34,7 @@ const Registration = () => {
     const password = form.password.value;
     const terms = form.terms.checked;
 
-    // Password Validation (As per assignment)
+    // Password Validation 
     if (!/^.{6,}$/.test(password)) {
       return toast.error("Password must be at least 6 characters");
     }
@@ -55,7 +57,7 @@ const Registration = () => {
       setUser({ ...user, displayName: name, photoURL });
 
       // Save user to DB
-      await fetch(`${import.meta.env.VITE_API_URL}/users`, {
+      await fetch("http://localhost:5000/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -76,7 +78,7 @@ const Registration = () => {
     }
   };
 
-  // 🔵 Google Login
+  //  Google Login
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
@@ -84,7 +86,7 @@ const Registration = () => {
       setUser(user);
 
       // Save Google user
-      await fetch(`${import.meta.env.VITE_API_URL}/users`, {
+      await fetch("http://localhost:5000/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

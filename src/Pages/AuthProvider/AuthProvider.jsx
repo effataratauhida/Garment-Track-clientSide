@@ -8,6 +8,7 @@ const auth = getAuth(app);
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [role, setRole] = useState(null);
 
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
@@ -19,8 +20,33 @@ const AuthProvider = ({children}) => {
 
    useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) =>{
-        setUser(currentUser);
-        setLoading(false);
+        if (currentUser) {
+
+            setUser(currentUser);
+
+            const fetchRole = async () => {
+                try{
+                    const res = await fetch(`http://localhost:5000/users/${currentUser.email}`);
+                    const data = await res.json();
+                        
+                    setRole(data.role);
+                }
+                    catch (err) {
+          console.log(err);
+        } 
+        finally {
+            setLoading(false);
+          }
+            };
+
+            fetchRole();
+        }
+         else {
+        setUser(null);
+        setRole(null);
+      }
+        
+        
     });
     return () => {
        unsubscribe();
@@ -30,6 +56,7 @@ const AuthProvider = ({children}) => {
     const authData = {
         user,
         setUser,
+        role,
         createUser,
         loading,
         signOutUser
