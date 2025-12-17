@@ -8,7 +8,7 @@ const Sidebar = () => {
 
   const { role } = useContext(AuthContext);
   
-  console.log("SIDEBAR ROLE", role);
+  //console.log("SIDEBAR ROLE", role);
 
   const roleLabel = role
   ? role.charAt(0).toUpperCase() + role.slice(1)

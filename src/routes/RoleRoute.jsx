@@ -1,5 +1,6 @@
 import { Navigate } from "react-router";
-import { useAuth } from "../Hooks/useAuth";
+import { useAuth } from "../Hooks/useAuh";
+
 
 const RoleRoute = ({ allowedRoles, children }) => {
   const { user, loading } = useAuth();

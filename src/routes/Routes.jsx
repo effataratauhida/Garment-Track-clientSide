@@ -135,9 +135,20 @@ const router = createBrowserRouter([
 
       
       //admin
-      {path: 'manageUsers', element: <ManageUsers></ManageUsers>},
-      {path: 'allProduct', element: <AllProduct></AllProduct>},
-      {path: 'allOrders', element: <AllOrders></AllOrders>},
+      {path: '/dashboard/manageUsers', 
+        element: (<RoleRoute allowedRoles={['admin']}>
+          <ManageUsers></ManageUsers>
+        </RoleRoute>) },
+
+      {path: 'allProduct', 
+        element: (<RoleRoute allowedRoles={['admin']}>
+          <AllProduct></AllProduct>
+        </RoleRoute>) },
+
+      {path: 'allOrders', 
+        element: (<RoleRoute allowedRoles={['admin']}>
+          <AllOrders></AllOrders>
+        </RoleRoute>) },
     ]
   }
 ]);
