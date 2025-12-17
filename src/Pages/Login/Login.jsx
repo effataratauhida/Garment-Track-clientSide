@@ -20,7 +20,7 @@ const {setUser} = useContext(AuthContext);
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
 
-   const auth = getAuth(app);
+  const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
   const [error, setError] = useState('');
   const [showPass, setShowPass] = useState(false);
@@ -38,11 +38,42 @@ const {setUser} = useContext(AuthContext);
       
       try {
         const result =  await signInWithEmailAndPassword(auth, email, password);
-        setUser(result.user);
+
+        //const userEmail = result.user.email;
+
+          // role & status fetch
+          const res = await fetch(`http://localhost:5000/users/${userEmail}`);
+          const userData = await res.json();
+          
+          // Status check
+          if (userData.status !== "approved") {
+            toast.error("Your account is not approved yet.");
+            return;
+          }
+
+          await fetch("http://localhost:5000/jwt", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include", 
+            body: JSON.stringify({ email: result.user.email }),
+          });
+          
+          // Set context
+          setUser({ ...result.user, ...userData });
+          
+          // Role-based redirect
+          if (userData.role === "admin") {
+            navigate("/dashboard/manageUsers");
+          } else if (userData.role === "manager") {
+            navigate("/dashboard/addProduct");
+          } else if (userData.role === "buyer") {
+            navigate("/dashboard/myOrders");
+          }
+        //setUser(result.user);
         toast.success('Login successfully!');
-        setTimeout(() => {
-          navigate(from, { replace: true });
-          }, 1500);
+        // setTimeout(() => {
+        //   navigate(from, { replace: true });
+        //   }, 1500);
         } 
         catch (error) {
           //console.log(error.message);
@@ -52,12 +83,71 @@ const {setUser} = useContext(AuthContext);
  
 
    //  Google login
-  const handleGoogleLogin = async () => {
+  
+//       try {
+//   const result = await signInWithEmailAndPassword(auth, email, password);
+//   const userEmail = result.user.email;
+
+//   // role & status fetch
+//   const res = await fetch(`http://localhost:5000/users/${userEmail}`);
+//   const userData = await res.json();
+
+//   // Status check
+//   if (userData.status !== "approved") {
+//     toast.error("Your account is not approved yet.");
+//     return;
+//   }
+
+//   const finalUser = { ...result.user, ...userData };
+
+//   setUser(finalUser);
+
+//   if (userData.role === "admin") {
+//     navigate("/dashboard/manageUsers");
+//   } else if (userData.role === "manager") {
+//     navigate("/dashboard/add-product");
+//   } else if (userData.role === "buyer") {
+//     navigate("/dashboard/myOrders");
+//   }
+
+//   toast.success("Login successfully!");
+
+// } catch (error) {
+//   setError("Didn't find any account");
+// } }
+
+  
+  
+   const handleGoogleLogin = async () => {
         try {
           const result = await signInWithPopup(auth, provider);
-          setUser(result.user);
+          const email = result.user.email;
+
+          const res = await fetch(`http://localhost:5000/users/${email}`);
+          const userData = await res.json();
+          if (userData.status !== "approved") {
+      toast.error("Your account is not approved yet.");
+      return;
+    }
+
+    await fetch("http://localhost:5000/jwt", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ email }),
+    });
+
+    setUser({ ...result.user, ...userData });
+
+    if (userData.role === "admin") {
+      navigate("/dashboard/manageUsers");
+    } else if (userData.role === "manager") {
+      navigate("/dashboard/add-product");
+    } else {
+      navigate("/dashboard/myOrders");
+    }
           toast.success('Logged in with Google!');
-          navigate('/');
+          
         } 
         catch (error) {
           toast.error(error.message);

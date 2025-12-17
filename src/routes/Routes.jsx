@@ -22,6 +22,7 @@ import ManageUsers from "../Pages/Dashboard/admin/ManageUsers";
 import AllProduct from "../Pages/Dashboard/admin/AllProduct";
 import AllOrders from "../Pages/Dashboard/admin/AllOrders";
 import Booking from "../Pages/Booking/Booking";
+import RoleRoute from "./RoleRoute";
 
 
 
@@ -68,7 +69,11 @@ const router = createBrowserRouter([
         },
         {
           path: '/booking/:id',
-          Component: Booking
+          element: (
+          <PrivateRoutes>
+            <Booking />
+          </PrivateRoutes>
+        ),
         }
     ]
 
@@ -82,19 +87,57 @@ const router = createBrowserRouter([
     ),
     children: [
       // buyer
-      {path: '/dashboard/myProfile', element: <MyProfile></MyProfile> },
-      {path: '/dashboard/myOrders', element: <MyOrders></MyOrders> },
-      {path: "/dashboard/trackOrder", element: <TrackOrder></TrackOrder>},
+      {path: 'myProfile', 
+      element: ( <RoleRoute allowedRoles={['buyer']}>
+        <MyProfile></MyProfile>
+        </RoleRoute> ) },
+
+      {path: 'myOrders', 
+        element: ( <RoleRoute allowedRoles={['buyer']}>
+          <MyOrders></MyOrders>
+        </RoleRoute>
+        ) },
+
+      {path: "trackOrder", 
+        element: (<RoleRoute allowedRoles={['buyer']}>
+          <TrackOrder></TrackOrder>
+        </RoleRoute>)
+        },
+
+
       // manager
-      {path: '/dashboard/addProduct', element: <AddProduct></AddProduct> },
-      {path: '/dashboard/manageProducts', element: <ManageProducts></ManageProducts>},
-      {path: '/dashboard/pendingOrders', element: <PendingOrders></PendingOrders> },
-      {path: '/dashboard/ApprovedOrders', element: <ApprovedOrders></ApprovedOrders> },
-      {path: '/dashboard/profile', element: <Profile></Profile>},
+      {path: 'addProduct', 
+        element: (<RoleRoute allowedRoles={['manager']}>
+          <AddProduct></AddProduct>
+        </RoleRoute>)
+         },
+
+      {path: 'manageProducts', 
+        element: (<RoleRoute allowedRoles={['manager']}>
+          <ManageProducts></ManageProducts>
+        </RoleRoute>)
+        },
+      
+      {path: 'pendingOrders', 
+        element: (<RoleRoute allowedRoles={['manager']}>
+          <PendingOrders></PendingOrders>
+        </RoleRoute>)  },
+
+      {path: 'ApprovedOrders', 
+        element: (<RoleRoute allowedRoles={['manager']}>
+          <ApprovedOrders></ApprovedOrders>
+        </RoleRoute>)  },
+
+      {path: 'profile', 
+        element: (<RoleRoute allowedRoles={['manager']}>
+          <Profile></Profile>
+        </RoleRoute>) },
+
+      
       //admin
-      {path: '/dashboard/manageUsers', element: <ManageUsers></ManageUsers>},
-      {path: '/dashboard/allProduct', element: <AllProduct></AllProduct>},
-      {path: '/dashboard/allOrders', element: <AllOrders></AllOrders>},
+      {path: 'manageUsers', element: <ManageUsers></ManageUsers>},
+      {path: 'allProduct', element: <AllProduct></AllProduct>},
+      {path: 'allOrders', element: <AllOrders></AllOrders>},
     ]
   }
 ]);

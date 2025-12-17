@@ -18,7 +18,7 @@ const Sidebar = () => {
 
   if(role === "buyer") {
     links = [
-      { name: "Dashboard", to: "/dashboard/dashboard" },
+      
       { name: "My Orders", to: "/dashboard/myOrders" },
       { name: "Track Order", to: "/dashboard/trackOrder" },
       { name: "My Profile", to: "/dashboard/myProfile" },
@@ -34,6 +34,7 @@ const Sidebar = () => {
     ];
   } else if(role === "admin") {
     links = [
+      
       { name: "Manage Users", to: "/dashboard/manageUsers" },
       { name: "All Product", to: "/dashboard/allProduct" },
       { name: "All Orders", to: "/dashboard/allOrders" },
@@ -57,7 +58,7 @@ const Sidebar = () => {
                      
         </Link>
         <p className="text-base font-semibold text-gray-600 mt-2 mb-4 text-center">
-           {roleLabel} Panel
+           {roleLabel} Dashboard
         </p>
 
         <div className="text-gray-600">
