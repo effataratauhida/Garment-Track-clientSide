@@ -37,27 +37,27 @@ const router = createBrowserRouter([
     children:[
         {
             path: '/',
-            Component: Home
+            element: <Home></Home>
         },
         {
           path: '/allProducts',
-          Component: AllProducts
+          element: <AllProducts></AllProducts>
         },
         {
           path: '/aboutUs',
-          Component: AboutUs
+          element: <AboutUs></AboutUs>
         },
         {
           path: '/contact',
-          Component: Contact
+          element: <Contact></Contact>
         },
         {
             path: '/login',
-            Component: Login
+            element: <Login></Login>
         },
         {
             path: '/register',
-            Component: Registration
+            element: <Registration></Registration>
         },
         {
             path: '/productDetails/:id',
@@ -123,7 +123,7 @@ const router = createBrowserRouter([
           <PendingOrders></PendingOrders>
         </RoleRoute>)  },
 
-      {path: 'ApprovedOrders', 
+      {path: 'approvedOrders', 
         element: (<RoleRoute allowedRoles={['manager']}>
           <ApprovedOrders></ApprovedOrders>
         </RoleRoute>)  },
@@ -135,7 +135,7 @@ const router = createBrowserRouter([
 
       
       //admin
-      {path: '/dashboard/manageUsers', 
+      {path: 'manageUsers', 
         element: (<RoleRoute allowedRoles={['admin']}>
           <ManageUsers></ManageUsers>
         </RoleRoute>) },

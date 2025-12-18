@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import UpdateUserModal from "./UpdateUserModal";
+
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -8,10 +10,17 @@ const ManageUsers = () => {
 
   useEffect(() => {
     fetch("http://localhost:5000/users", {
+      
       credentials: "include",
     })
       .then(res => res.json())
-      .then(data => setUsers(data));
+      .then(data => {
+        //console.log("All users:", data);
+        //setUsers(data)
+        const filteredUsers = data.filter(user => user.role !== "admin");
+  setUsers(filteredUsers);
+      } );
+      //console.log("All users:", data);
   }, []);
 
   const openModal = (user) => {

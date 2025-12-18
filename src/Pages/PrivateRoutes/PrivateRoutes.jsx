@@ -10,7 +10,7 @@ const PrivateRoutes = ({ children }) => {
     if (loading) {
     return (
         <div className="flex justify-center items-center h-screen bg-[#d2e7d0] py-20">
-            <p className="text-4xl font-semibold text-[#1d5008]">
+            <p className="text-4xl font-semibold text-[#f40b0b]">
                 L <span className="loading loading-spinner loading-xl"></span> ading...</p>
         </div>
     );

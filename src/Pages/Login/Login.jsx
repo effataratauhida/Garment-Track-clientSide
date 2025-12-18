@@ -39,7 +39,7 @@ const {setUser} = useContext(AuthContext);
       try {
         const result =  await signInWithEmailAndPassword(auth, email, password);
 
-        //const userEmail = result.user.email;
+        const userEmail = result.user.email;
 
           // role & status fetch
           const res = await fetch(`http://localhost:5000/users/${userEmail}`);
@@ -47,10 +47,11 @@ const {setUser} = useContext(AuthContext);
           
           // Status check
           if (userData.status !== "approved") {
-            toast.error("Your account is not approved yet.");
-            return;
+            toast.error("Your account is not approved yet.")
+             navigate("/");;
+            // return;
           }
-
+console.log(userData)
           await fetch("http://localhost:5000/jwt", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -126,8 +127,9 @@ const {setUser} = useContext(AuthContext);
           const res = await fetch(`http://localhost:5000/users/${email}`);
           const userData = await res.json();
           if (userData.status !== "approved") {
-      toast.error("Your account is not approved yet.");
-      return;
+      toast.error("Your account is not approved yet.")
+       navigate("/");;
+      // return;
     }
 
     await fetch("http://localhost:5000/jwt", {

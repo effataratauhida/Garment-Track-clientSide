@@ -25,7 +25,7 @@ const Sidebar = () => {
     ];
   } else if(role === "manager") {
     links = [
-      { name: "Add Product", to: "/dashboard/add-product" },
+      { name: "Add Product", to: "/dashboard/addProduct" },
       { name: "Manage Products", to: "/dashboard/manageProducts" },
       { name: "Pending Orders", to: "/dashboard/pendingOrders" },
       { name: "Approved Orders", to: "/dashboard/approvedOrders" },

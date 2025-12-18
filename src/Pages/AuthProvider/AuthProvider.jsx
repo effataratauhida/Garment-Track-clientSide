@@ -11,6 +11,7 @@ const AuthProvider = ({children}) => {
     const [role, setRole] = useState(null);
 
     const createUser = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
     };
 
@@ -18,40 +19,36 @@ const AuthProvider = ({children}) => {
         return signOut(auth);
     }
 
-   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) =>{
-        if (currentUser) {
+  useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+    if (currentUser) {
+      setUser(currentUser);
 
-            setUser(currentUser);
+      try {
+        const res = await fetch(
+          `http://localhost:5000/users/${currentUser.email}`,
+          { credentials: "include" }
+        );
+        const data = await res.json();
 
-            const fetchRole = async () => {
-                try{
-                    const res = await fetch(`http://localhost:5000/users/${currentUser.email}`);
-                    const data = await res.json();
-                        
-                    setRole(data.role);
-                }
-                    catch (err) {
-          console.log(err);
-        } 
-        finally {
-            setLoading(false);
-          }
-            };
-
-            fetchRole();
-        }
-         else {
-        setUser(null);
-        setRole(null);
+        // 🔐 SAFE fallback
+        setRole(data?.role || "buyer");
+      } catch (error) {
+        console.error("Role fetch error:", error);
+        setRole("buyer");
+      } finally {
+        setLoading(false); 
       }
-        
-        
-    });
-    return () => {
-       unsubscribe();
+    } else {
+      setUser(null);
+      setRole(null);
+      setLoading(false);
     }
-   },[])
+  });
+
+  return () => unsubscribe();
+}, []);
+
 
     const authData = {
         user,
