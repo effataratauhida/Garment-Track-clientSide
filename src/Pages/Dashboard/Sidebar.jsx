@@ -43,7 +43,15 @@ const Sidebar = () => {
   }
 
   
-
+  const handleLogout = () => { 
+        signOutUser()
+        .then(() => {
+            toast.success("Logged out successfully!");
+            navigate("/");
+        })
+        .catch(err => 
+            console.log(err));
+    };
 
   return (
     <div className="w-64 max-w-11/12 mx-auto bg-gray-200 shadow-md min-h-screen p-4 flex flex-col">
@@ -94,6 +102,7 @@ const Sidebar = () => {
         {/* logout btn */}
          <div className="mt-auto pb-5 text-center">
           <button
+          onClick={handleLogout}
           className="py-2 px-18  cursor-pointer 
              rounded-sm font-semibold text-sm sm:text-base 
              bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] hover:bg-transparent

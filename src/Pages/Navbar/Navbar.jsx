@@ -136,9 +136,9 @@ const Navbar = () => {
                         <button
                           onClick={handleLogout}
                           className="py-2 px-4 sm:py-2 sm:px-6 cursor-pointer 
-                                                    rounded-sm font-semibold text-sm sm:text-base 
-                                                    bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] hover:bg-transparent
-                                                    hover:scale-110 text-white"
+                            rounded-sm font-semibold text-sm sm:text-base 
+                            bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] hover:bg-transparent
+                            hover:scale-110 text-white"
                         >Logout
                         </button>
 

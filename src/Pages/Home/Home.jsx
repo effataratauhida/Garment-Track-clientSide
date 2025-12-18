@@ -362,7 +362,7 @@ const feedbacks = [
 
                {/* why choose us */}
 
-               <section className="pt-16 bg-red-400 ">
+               <section className="pt-16 pb-20 ">
       <div className="max-w-11/12 mx-auto px-6">
         <h2 className="text-center text-2xl md:text-4xl font-extrabold 
                     bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] bg-clip-text text-transparent mb-10">
