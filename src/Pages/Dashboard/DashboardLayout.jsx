@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import Navbar from "../Navbar/Navbar";
+import { div } from "framer-motion/client";
+import Footer from "../Footer/Footer";
 
 const DashboardLayout = () => {
  //const { user } = useContext(AuthContext);
@@ -17,7 +20,9 @@ const DashboardLayout = () => {
   }
   
   return (
-    <div className="flex min-h-screen ">
+      <div>
+        <Navbar></Navbar>
+    <div className="flex  mt-16 ">
       {/* Sidebar */}
       <Sidebar role={userRole} />
       
@@ -26,6 +31,8 @@ const DashboardLayout = () => {
         <Outlet />
       </div>
 
+    </div>
+    <Footer></Footer>
     </div>
   );
 };

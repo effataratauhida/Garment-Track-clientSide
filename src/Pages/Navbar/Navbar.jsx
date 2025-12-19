@@ -7,14 +7,16 @@ import toast from 'react-hot-toast';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import { HiOutlineHome, HiScissors } from 'react-icons/hi';
 import { House, LayoutDashboard } from 'lucide-react';
+import { useTheme } from '../../Context/ThemeContext';
 
 
 const Navbar = () => {
 
     const { user, signOutUser } = useContext(AuthContext); 
     const [dropdownOpen, setDropdownOpen] = useState(false);
-     const [open, setOpen] = useState(false);
-      const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
+    const { theme, toggleTheme } = useTheme();
 
     const handleLogout = () => { 
         signOutUser()
@@ -73,6 +75,12 @@ const Navbar = () => {
                     </h2>
                      
                     </Link>
+                    {/* <button
+                          onClick={toggleTheme}
+                          className="px-2 py-1  rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+                        >
+                          {theme === "light" ? "Dark Mode" : "Light Mode"}
+                        </button> */}
                 </div>
 
 

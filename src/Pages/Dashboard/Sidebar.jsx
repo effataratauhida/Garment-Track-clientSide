@@ -43,28 +43,28 @@ const Sidebar = () => {
   }
 
   
-  const handleLogout = () => { 
-        signOutUser()
-        .then(() => {
-            toast.success("Logged out successfully!");
-            navigate("/");
-        })
-        .catch(err => 
-            console.log(err));
-    };
+  // const handleLogout = () => { 
+  //       signOutUser()
+  //       .then(() => {
+  //           toast.success("Logged out successfully!");
+  //           navigate("/");
+  //       })
+  //       .catch(err => 
+  //           console.log(err));
+  //   };
 
   return (
     <div className="w-64 max-w-11/12 mx-auto bg-gray-200 shadow-md min-h-screen p-4 flex flex-col">
       <div>
       
       {/* logo */}
-      <Link to='/' className="flex items-center hover:scale-105 ">
+      {/* <Link to='/' className="flex items-center hover:scale-105 ">
                     <span className="text-black"><HiScissors className='h-7 w-7'  /></span>
                     <h2 className='text-gray-800 font-bold text-2xl'>
                      Garment<span className='text-[#F83600]'>Track</span>
                     </h2>
                      
-        </Link>
+        </Link> */}
         <p className="text-base font-semibold text-gray-600 mt-2 mb-4 text-center">
            {roleLabel} Dashboard
         </p>
@@ -99,7 +99,7 @@ const Sidebar = () => {
       </ul>
 
 
-        {/* logout btn */}
+        {/* logout btn
          <div className="mt-auto pb-5 text-center">
           <button
           onClick={handleLogout}
@@ -109,7 +109,7 @@ const Sidebar = () => {
              hover:scale-110 text-white"
           >Logout
         </button>
-         </div>
+         </div> */}
         
     </div>
   );

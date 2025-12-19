@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import UpdateUserModal from "./UpdateUserModal";
-
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -10,17 +8,14 @@ const ManageUsers = () => {
 
   useEffect(() => {
     fetch("http://localhost:5000/users", {
-      
       credentials: "include",
     })
       .then(res => res.json())
       .then(data => {
-        //console.log("All users:", data);
-        //setUsers(data)
-        const filteredUsers = data.filter(user => user.role !== "admin");
-  setUsers(filteredUsers);
-      } );
-      //console.log("All users:", data);
+       
+        const filtered = data.filter(u => u.role !== "admin");
+        setUsers(filtered);
+      });
   }, []);
 
   const openModal = (user) => {
@@ -28,18 +23,18 @@ const ManageUsers = () => {
     setShowModal(true);
   };
 
-
-
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Manage Users</h2>
+      <h2 className="text-2xl text-center md:text-4xl font-extrabold pb-5
+                    bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] bg-clip-text text-transparent">Manage Users</h2>
 
-      <table className="table w-full">
+      <table className="table w-full bg-gray-100">
         <thead>
           <tr>
             <th>Name</th>
             <th>Email</th>
             <th>Role</th>
+            <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -49,13 +44,18 @@ const ManageUsers = () => {
             <tr key={user._id}>
               <td>{user.name}</td>
               <td>{user.email}</td>
+              <td>{user.role}</td>
               <td>
-                <span className="badge badge-outline">{user.role}</span>
+                <span className={`badge ${
+                  user.status === "suspended" ? "badge-error" : "badge-success"
+                }`}>
+                  {user.status}
+                </span>
               </td>
               <td>
                 <button
                   onClick={() => openModal(user)}
-                  className="btn btn-sm btn-primary"
+                  className="btn btn-sm border-2 border-orange-600"
                 >
                   Update
                 </button>
