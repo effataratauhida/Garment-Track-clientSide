@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 const UpdateUserModal = ({ user, setShowModal, setUsers }) => {
   const [role, setRole] = useState(user.role);
-  const [status, setStatus] = useState(user.status || "approved");
+  const [status, setStatus] = useState(user.status);
   const [suspendReason, setSuspendReason] = useState("");
   const [suspendFeedback, setSuspendFeedback] = useState("");
   const [loading, setLoading] = useState(false);
@@ -25,7 +25,7 @@ const UpdateUserModal = ({ user, setShowModal, setUsers }) => {
       },
       body: JSON.stringify({
         role,
-        status,
+        status: status || 'approved',
         suspendReason,
         suspendFeedback,
       }),
@@ -77,6 +77,7 @@ const UpdateUserModal = ({ user, setShowModal, setUsers }) => {
           onChange={e => setStatus(e.target.value)}
           className="select select-bordered w-full mb-3"
         >
+        <option value="pending" disabled>Pending</option>
           <option value="approved">Approved</option>
           <option value="suspended">Suspended</option>
         </select>

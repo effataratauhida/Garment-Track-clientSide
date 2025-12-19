@@ -23,6 +23,7 @@ import AllProduct from "../Pages/Dashboard/admin/AllProduct";
 import AllOrders from "../Pages/Dashboard/admin/AllOrders";
 import Booking from "../Pages/Booking/Booking";
 import RoleRoute from "./RoleRoute";
+import OrderDetails from "../Pages/Dashboard/admin/OrderDetails";
 
 
 
@@ -75,6 +76,7 @@ const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         }
+        
         
     ]
 
@@ -150,6 +152,13 @@ const router = createBrowserRouter([
         element: (<RoleRoute allowedRoles={['admin']}>
           <AllOrders></AllOrders>
         </RoleRoute>) },
+        {
+          path: 'order/:id',
+          element: (<RoleRoute allowedRoles={['admin']}>
+          <OrderDetails></OrderDetails>
+        </RoleRoute>)
+        
+        }
     ]
   }
 ]);

@@ -49,8 +49,9 @@ const AllProduct = () => {
     <div className="p-6">
       <h2 className="text-2xl text-center md:text-4xl font-extrabold pb-5
           bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] bg-clip-text text-transparent">All Products</h2>
-
-      <table className="table w-full">
+      
+      <div className="overflow-x-auto">
+      <table className="table w-full min-w-[900px]">
         <thead>
           <tr>
             <th>Image</th>
@@ -68,10 +69,10 @@ const AllProduct = () => {
             <tr key={product._id}>
               <td>
                 <img
-  src={product.images?.[0]}
-  alt={product.name}
-  className="w-12 h-12 rounded object-cover"
-/>
+                    src={product.images?.[0]}
+                    alt={product.name}
+                    className="w-12 h-12 rounded object-cover"
+                  />
               </td>
               <td>{product.name}</td>
               <td>${product.price}</td>
@@ -87,13 +88,13 @@ const AllProduct = () => {
                 />
               </td>
 
-              <td className="space-x-2">
+              <td className="space-x-3">
                 <button
                   onClick={() => {
                     setSelectedProduct(product);
                     setShowUpdateModal(true);
                   }}
-                  className="btn btn-sm btn-primary"
+                  className="btn btn-sm bg-orange-500 text-white"
                 >
                   Update
                 </button>
@@ -103,7 +104,7 @@ const AllProduct = () => {
                     setSelectedProduct(product);
                     setShowDeleteModal(true);
                   }}
-                  className="btn btn-sm btn-error"
+                  className="btn btn-sm bg-red-500 text-white"
                 >
                   Delete
                 </button>
@@ -112,6 +113,7 @@ const AllProduct = () => {
           ))}
         </tbody>
       </table>
+      </div>
 
       {/* Update Modal */}
       {showUpdateModal && (

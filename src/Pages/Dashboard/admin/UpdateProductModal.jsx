@@ -2,74 +2,139 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 const UpdateProductModal = ({ product, setProducts, onClose }) => {
-  const [formData, setFormData] = useState(product);
+  const [formData, setFormData] = useState({
+    name: product.name || "",
+    description: product.description || "",
+    price: product.price || "",
+    category: product.category || "",
+    images: product.images?.join(", ") || "",
+    demoVideo: product.demoVideo || "",
+    paymentOption: product.paymentOption || "Cash on Delivery",
+  });
 
-  const handleSubmit = async () => {
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+
+    const updatedProduct = {
+      ...formData,
+      price: Number(formData.price),
+      images: formData.images.split(",").map(img => img.trim()),
+    };
+
     const res = await fetch(
       `http://localhost:5000/productsData/${product._id}`,
       {
         method: "PATCH",
-        credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        credentials: "include",
+        body: JSON.stringify(updatedProduct),
       }
     );
 
     if (res.ok) {
+      const data = await res.json();
+
       setProducts(prev =>
-        prev.map(p => (p._id === product._id ? formData : p))
+        prev.map(p => (p._id === product._id ? data : p))
       );
-      toast.success("Product updated");
+
+      toast.success("Product Updated Successfully");
       onClose();
+    } else {
+      toast.error("Failed to update product");
     }
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded w-[500px]">
-        <h3 className="text-xl font-bold mb-4">Update Product</h3>
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+      <div className="bg-white w-full max-w-2xl rounded-lg p-6">
+        <h2 className="text-xl font-bold mb-4">Update Product</h2>
 
-        <input
-          className="input input-bordered w-full mb-2"
-          value={formData.name}
-          onChange={e => setFormData({ ...formData, name: e.target.value })}
-          placeholder="Product Name"
-        />
+        <form onSubmit={handleUpdate} className="space-y-3">
+          <input
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Product Name"
+            className="input input-bordered w-full"
+            required
+          />
 
-        <input
-          className="input input-bordered w-full mb-2"
-          type="number"
-          value={formData.price}
-          onChange={e => setFormData({ ...formData, price: e.target.value })}
-          placeholder="Price"
-        />
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            placeholder="Description"
+            className="textarea textarea-bordered w-full"
+            required
+          />
 
-        <input
-          className="input input-bordered w-full mb-2"
-          value={formData.category}
-          onChange={e =>
-            setFormData({ ...formData, category: e.target.value })
-          }
-          placeholder="Category"
-        />
+          <input
+            type="number"
+            name="price"
+            value={formData.price}
+            onChange={handleChange}
+            placeholder="Price"
+            className="input input-bordered w-full"
+            required
+          />
 
-        <textarea
-          className="textarea textarea-bordered w-full mb-4"
-          value={formData.description}
-          onChange={e =>
-            setFormData({ ...formData, description: e.target.value })
-          }
-          placeholder="Description"
-        />
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            className="select select-bordered w-full"
+          >
+            <option>Shirt</option>
+            <option>Pant</option>
+            <option>Jacket</option>
+            <option>Accessories</option>
+          </select>
 
-        <div className="flex justify-end gap-2">
-          <button onClick={onClose} className="btn btn-sm">
-            Cancel
-          </button>
-          <button onClick={handleSubmit} className="btn btn-sm btn-primary">
-            Save
-          </button>
-        </div>
+          <input
+            name="images"
+            value={formData.images}
+            onChange={handleChange}
+            placeholder="Image URLs (comma separated)"
+            className="input input-bordered w-full"
+          />
+
+          <input
+            name="demoVideo"
+            value={formData.demoVideo}
+            onChange={handleChange}
+            placeholder="Demo Video Link (optional)"
+            className="input input-bordered w-full"
+          />
+
+          <select
+            name="paymentOption"
+            value={formData.paymentOption}
+            onChange={handleChange}
+            className="select select-bordered w-full"
+          >
+            <option>Cash on Delivery</option>
+            <option>Stripe</option>
+          </select>
+
+          <div className="flex justify-end gap-2 pt-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className="btn btn-outline"
+            >
+              Cancel
+            </button>
+
+            <button type="submit" className="btn bg-orange-500 text-white">
+              Update
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

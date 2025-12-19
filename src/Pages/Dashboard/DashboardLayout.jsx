@@ -20,14 +20,16 @@ const DashboardLayout = () => {
   }
   
   return (
-      <div>
+      <div >
         <Navbar></Navbar>
+
     <div className="flex  mt-16 ">
+      
       {/* Sidebar */}
       <Sidebar role={userRole} />
-      
+     
       {/* Main content */}
-      <div className="flex-1 p-6 bg-gray-50">
+      <div className="flex-1 md:p-6 overflow-x-hidden p-3 bg-gray-50">
         <Outlet />
       </div>
 
