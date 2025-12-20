@@ -35,7 +35,8 @@ const AllOrders = () => {
       </div>
 
       {/* Table */}
-      <table className="table w-full">
+      <div className="overflow-x-auto">
+      <table className="table w-full min-w-[900px]">
         <thead>
           <tr>
             <th>Order ID</th>
@@ -62,7 +63,7 @@ const AllOrders = () => {
               <td>
                 <Link
                   to={`/dashboard/order/${order._id}`}
-                  className="btn btn-sm btn-primary"
+                  className="btn btn-sm bg-orange-500 text-white"
                 >
                   View
                 </Link>
@@ -71,6 +72,7 @@ const AllOrders = () => {
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
 };

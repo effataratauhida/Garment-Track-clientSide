@@ -4,12 +4,13 @@ import toast from "react-hot-toast";
 const UpdateProductModal = ({ product, setProducts, onClose }) => {
   const [formData, setFormData] = useState({
     name: product.name || "",
-    description: product.description || "",
+    shortDescription: product.shortDescription || "",
+    longDescription: product.longDescription || "",
     price: product.price || "",
     category: product.category || "",
     images: product.images?.join(", ") || "",
     demoVideo: product.demoVideo || "",
-    paymentOption: product.paymentOption || "Cash on Delivery",
+    paymentOption:  product.paymentOptions?.[0] || "Cash on Delivery",
   });
 
   const handleChange = (e) => {
@@ -65,10 +66,19 @@ const UpdateProductModal = ({ product, setProducts, onClose }) => {
           />
 
           <textarea
-            name="description"
-            value={formData.description}
+            name="shortDescription"
+            value={formData.shortDescription}
             onChange={handleChange}
-            placeholder="Description"
+            placeholder="Short Description"
+            className="textarea textarea-bordered w-full"
+            required
+          />
+
+          <textarea
+            name="longDescription"
+            value={formData.longDescription}
+            onChange={handleChange}
+            placeholder="Long Description"
             className="textarea textarea-bordered w-full"
             required
           />

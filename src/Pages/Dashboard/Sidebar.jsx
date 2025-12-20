@@ -54,7 +54,7 @@ const Sidebar = () => {
   //   };
 
   return (
-    <div className="w-64 max-w-11/12 mx-auto bg-gray-200 shadow-md min-h-screen p-4 flex flex-col">
+    <div className="md:w-64 w-32 max-w-11/12 mx-auto bg-gray-200 shadow-md min-h-screen p-4 flex flex-col">
       <div>
       
       {/* logo */}
@@ -75,21 +75,33 @@ const Sidebar = () => {
       </div>
       
       {/* Links */}
-      <ul className="space-y-2 mt-3">
+      <ul className="space-y-2 mt-3 max-w-11/12 mx-auto">
         {links.map(link => (
           <li key={link.to}>
             <NavLink
               to={link.to}
+  //               className={({ isActive }) =>
+  //   `
+  //   block transition-all duration-200
+  //   text-sm px-4 py-2 rounded-full      /* mobile default */
+  //   sm:text-base sm:px-6                /* tablet */
+  //   md:px-8                             /* desktop */
+
+  //   ${isActive
+  //     ? "bg-gradient-to-r from-[#F83600] to-[#F9D423] text-white font-bold"
+  //     : "text-[#F83600] font-medium"}
+  //   `
+  // }
              style={({ isActive }) => ({
           background: isActive
             ? "linear-gradient(90deg,#F83600,#F9D423) "
             : "transparent",
           color: isActive ? "white" : "#F83600",
-          fontWeight: isActive ? "700" : "500",
-          padding: "8px 50px",
+          fontWeight: isActive ? "600" : "500",
+           padding: "6px 32px",
           borderRadius: "18px",
         })}
-        className="block"
+        className="block "
               
             >
               {link.name}

@@ -20,8 +20,8 @@ const OrderDetails = () => {
       <h2 className="text-2xl font-bold mb-4">Order Details</h2>
 
       <p><b>Order ID:</b> {order._id}</p>
-      <p><b>User:</b> {order.userEmail}</p>
-      <p><b>Product:</b> {order.productName}</p>
+      <p><b>User:</b> {order.email}</p>
+      <p><b>Product:</b> {order.productTitle}</p>
       <p><b>Quantity:</b> {order.quantity}</p>
       <p><b>Status:</b> {order.status}</p>
 
