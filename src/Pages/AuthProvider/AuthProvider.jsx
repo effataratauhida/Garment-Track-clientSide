@@ -31,7 +31,7 @@ const AuthProvider = ({children}) => {
         );
         const data = await res.json();
 
-        // 🔐 SAFE fallback
+        // SAFE fallback
         setRole(data?.role || "buyer");
       } catch (error) {
         console.error("Role fetch error:", error);

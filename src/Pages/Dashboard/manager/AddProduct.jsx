@@ -69,6 +69,7 @@ const AddProduct = () => {
       paymentOptions: [form.paymentOptions],
       showOnHome: false,
       createdBy: "Manager",
+      //managerEmail: user.email,
     };
 
     const res = await fetch("http://localhost:5000/productsData", {

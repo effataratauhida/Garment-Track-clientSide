@@ -1,5 +1,5 @@
 import { Navigate } from "react-router";
-import { useAuth } from "../Hooks/useAuh";
+import { useAuth } from "../Hooks/useAuth";
 
 
 const RoleRoute = ({ allowedRoles, children }) => {
