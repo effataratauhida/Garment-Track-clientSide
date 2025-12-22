@@ -136,7 +136,7 @@ const feedbacks = [
   const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-    fetch("http://localhost:5000/productsData/limit")
+    fetch("https://garment-track-server-zeta.vercel.app/productsData/limit")
       .then(res => res.json())
       .then(data => {
         //console.log("Products:", data);

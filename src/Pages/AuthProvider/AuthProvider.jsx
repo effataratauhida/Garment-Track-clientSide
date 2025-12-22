@@ -26,11 +26,20 @@ const AuthProvider = ({children}) => {
 
       try {
         const res = await fetch(
-          `http://localhost:5000/users/${currentUser.email}`,
+          `https://garment-track-server-zeta.vercel.app/users/${currentUser.email}`,
           { credentials: "include" }
         );
         const data = await res.json();
+      
 
+         setUser({
+          ...currentUser,
+          role: data.role,
+          status: data.status,
+          photoURL: currentUser.photoURL,
+        });
+
+        
         // SAFE fallback
         setRole(data?.role || "buyer");
       } catch (error) {

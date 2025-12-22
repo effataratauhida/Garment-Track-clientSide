@@ -8,7 +8,7 @@ const AllOrders = () => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/orders${statusFilter ? `?status=${statusFilter}` : ""}`,
+      `https://garment-track-server-zeta.vercel.app/orders${statusFilter ? `?status=${statusFilter}` : ""}`,
       { credentials: "include" }
     )
       .then(res => res.json())

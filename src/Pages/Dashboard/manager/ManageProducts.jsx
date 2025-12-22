@@ -2,16 +2,18 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import DeleteModalManager from "./DeleteModalManager";
 import { useAuth } from "../../../Hooks/useAuth";
+import ManageProductsUpdateModalManager from './ManageProductsUpdateModalManager';
 
 const ManagerManageProducts = () => {
   const { user } = useAuth();
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [updateProduct, setUpdateProduct] = useState(null);
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/productsData/manager`,
+      `https://garment-track-server-zeta.vercel.app/productsData/manager`,
       { credentials: "include" }
     )
       .then(res => res.json())
@@ -29,7 +31,8 @@ const ManagerManageProducts = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-3xl font-bold mb-4">Manage Products</h2>
+      <h2 className="text-2xl text-center md:text-4xl font-extrabold mb-6
+          bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] bg-clip-text text-transparent">Manage Products</h2>
 
       {/* Search */}
       <input
@@ -67,9 +70,7 @@ const ManagerManageProducts = () => {
 
                 <td className="space-x-2">
                   <button
-                    onClick={() =>
-                      window.location.href =
-                      `/dashboard/update-product/${product._id}`
+                    onClick={() => setUpdateProduct(product)
                     }
                     className="btn btn-xs bg-orange-500 text-white"
                   >
@@ -88,6 +89,15 @@ const ManagerManageProducts = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Update Modal */}
+{updateProduct && (
+  <ManageProductsUpdateModalManager
+    product={updateProduct}
+    setProducts={setProducts}
+    onClose={() => setUpdateProduct(null)}
+  />
+)}
 
       {/* Delete Modal */}
       {selectedProduct && (

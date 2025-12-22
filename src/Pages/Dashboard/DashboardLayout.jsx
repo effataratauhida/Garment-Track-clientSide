@@ -60,11 +60,11 @@ const DashboardLayout = () => {
       </div>
     );
   }
-  if (!user) {
-    return <div className="text-center text-red-600 text-2xl mt-20">
-      No user found. Please login again.
-    </div>;
-  }
+  // if (!user) {
+  //   return <div className="text-center text-red-600 text-2xl mt-20">
+  //     No user found. Please login again.
+  //   </div>;
+  // }
 //console.log("DashboardLayout:", { user, role, loading });
   return (
     <div>

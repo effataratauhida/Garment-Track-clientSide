@@ -6,7 +6,7 @@ const OrderDetails = () => {
   const [order, setOrder] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/orders/${id}`, {
+    fetch(`https://garment-track-server-zeta.vercel.app/orders/${id}`, {
       credentials: "include",
     })
       .then(res => res.json())

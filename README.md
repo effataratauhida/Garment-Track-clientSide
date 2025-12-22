@@ -1,16 +1,99 @@
-# React + Vite
+# 🧵 Garments Track – Order & Production Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Garments Track is a full-stack MERN application designed to manage garments products, orders, and user roles efficiently.  
+The system supports **Admin, Manager, and Buyer** roles with secure authentication, role-based access control, and a modern responsive UI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌐 Live Link
 
-## React Compiler
+- **Frontend:** https://garmenttrack-28056.web.app  
+  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Frontend
+- React (Vite)
+- React Router DOM
+- Tailwind CSS + DaisyUI
+- Firebase Authentication
+- React Hot Toast
+- Axios / Fetch API
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB (Atlas)
+- JWT Authentication
+- Cookie-based Auth
+- CORS
+
+### Deployment
+- Frontend: Firebase Hosting
+- Backend: Vercel
+
+---
+
+## 👥 User Roles & Permissions
+
+### 👑 Admin
+- View all users
+- Approve / suspend buyers
+- Manage all products
+- Manage all orders (Approve / Reject)
+- Control “Show on Home” products
+
+### 🧑‍💼 Manager
+- Add products
+- Update own products
+- Delete own products
+- Cannot place orders
+
+### 🛒 Buyer
+- Can view products
+- Can place orders **only after admin approval**
+- View own orders
+- Track order status
+
+> ❌ Buyer & Manager **cannot order** until status is `approved`
+
+---
+
+## 🔐 Authentication & Security
+
+- Firebase Authentication (Email/Password + Google)
+- JWT generated from backend
+- Stored in **HTTP-only cookies**
+- Role-based route protection
+- Secure CORS configuration for production
+
+---
+
+## 📦 Core Features
+
+- 🔑 Authentication & Authorization
+- 🧵 Product Management (CRUD)
+- 🛒 Order Management
+- 📊 Role-based Dashboards
+- 🔍 Search & Filter
+- 🖼️ Image Gallery for Products
+- 📱 Fully Responsive Design
+
+---
+
+## 🧪 Admin Approval Logic
+
+- New buyers are created with `status: pending`
+- Pending buyers:
+  - Cannot place orders
+  - Dashboard pages show “Nothing here”
+- After admin approval:
+  - Order Now button becomes active
+  - Dashboard content becomes visible
+
+---
+
+
+

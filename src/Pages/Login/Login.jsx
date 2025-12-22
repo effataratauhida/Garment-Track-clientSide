@@ -42,7 +42,7 @@ const {setUser} = useContext(AuthContext);
         const userEmail = result.user.email;
 
           // role & status fetch
-          const res = await fetch(`http://localhost:5000/users/${userEmail}`);
+          const res = await fetch(`https://garment-track-server-zeta.vercel.app/users/${userEmail}`);
           const userData = await res.json();
           
           // Status check
@@ -51,8 +51,8 @@ const {setUser} = useContext(AuthContext);
              navigate("/");;
             // return;
           }
-console.log(userData)
-          await fetch("http://localhost:5000/jwt", {
+         //console.log(userData)
+          await fetch("https://garment-track-server-zeta.vercel.app/jwt", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include", 
@@ -60,7 +60,7 @@ console.log(userData)
           });
           
           // Set context
-          setUser({ ...result.user, ...userData });
+          //setUser({ ...result.user, ...userData });
           
           // Role-based redirect
           if (userData.role === "admin") {
@@ -90,7 +90,7 @@ console.log(userData)
 //   const userEmail = result.user.email;
 
 //   // role & status fetch
-//   const res = await fetch(`http://localhost:5000/users/${userEmail}`);
+//   const res = await fetch(`https://garment-track-server-zeta.vercel.app/users/${userEmail}`);
 //   const userData = await res.json();
 
 //   // Status check
@@ -124,7 +124,7 @@ console.log(userData)
           const result = await signInWithPopup(auth, provider);
           const email = result.user.email;
 
-          const res = await fetch(`http://localhost:5000/users/${email}`);
+          const res = await fetch(`https://garment-track-server-zeta.vercel.app/users/${email}`);
           const userData = await res.json();
           if (userData.status !== "approved") {
       toast.error("Your account is not approved yet.")
@@ -132,7 +132,7 @@ console.log(userData)
       // return;
     }
 
-    await fetch("http://localhost:5000/jwt", {
+    await fetch("https://garment-track-server-zeta.vercel.app/jwt", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

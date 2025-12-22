@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useAuth } from './../../Hooks/useAuth';
 
  
 const ProductDetails = () => {
@@ -9,12 +10,13 @@ const ProductDetails = () => {
   const [activeImage, setActiveImage] = useState("");
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
 
 
-  const user = { role: "buyer", status: "approved" }; 
+  //const user = { role: "buyer", status: "approved" }; 
 
  useEffect(() => {
-  fetch(`http://localhost:5000/productsData/${id}`)
+  fetch(`https://garment-track-server-zeta.vercel.app/productsData/${id}`)
     .then(res => res.json())
     .then(data => {
     //   const selected = data.find(
@@ -45,6 +47,9 @@ const ProductDetails = () => {
     user &&
     user.role === "buyer" &&
     user.status === "approved";
+
+
+
 
   return (
     <section className="py-16 mt-10 bg-gray-50 min-h-screen">
@@ -128,9 +133,9 @@ const ProductDetails = () => {
               </button>
             )}
 
-            {!canOrder && (
+            {!canOrder && user?.role === "buyer" && user.status !== "approved" && (
               <p className="text-sm text-red-500 mt-2">
-                Only approved buyers can place orders.
+                Your account is not approved by Admin yet. Only approved buyers can place orders.
               </p>
             )}
           </div>

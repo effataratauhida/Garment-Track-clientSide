@@ -7,7 +7,7 @@ const ManageUsers = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:5000/users", {
+    fetch("https://garment-track-server-zeta.vercel.app/users", {
       credentials: "include",
     })
       .then(res => res.json())

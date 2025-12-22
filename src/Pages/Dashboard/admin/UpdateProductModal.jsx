@@ -27,7 +27,7 @@ const UpdateProductModal = ({ product, setProducts, onClose }) => {
     };
 
     const res = await fetch(
-      `http://localhost:5000/productsData/${product._id}`,
+      `https://garment-track-server-zeta.vercel.app/productsData/${product._id}`,
       {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },

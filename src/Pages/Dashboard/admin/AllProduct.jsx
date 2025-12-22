@@ -11,7 +11,7 @@ const AllProduct = () => {
 
   //  fetch all products
   useEffect(() => {
-    fetch("http://localhost:5000/productsData", {
+    fetch("https://garment-track-server-zeta.vercel.app/productsData", {
       credentials: "include",
     })
       .then(res => res.json())
@@ -22,7 +22,7 @@ const AllProduct = () => {
   //  toggle show on home
   const handleToggleHome = async (product) => {
     const res = await fetch(
-      `http://localhost:5000/productsData/showHome/${product._id}`,
+      `https://garment-track-server-zeta.vercel.app/productsData/showHome/${product._id}`,
       {
         method: "PATCH",
         credentials: "include",

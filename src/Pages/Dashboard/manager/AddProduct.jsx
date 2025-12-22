@@ -72,7 +72,7 @@ const AddProduct = () => {
       //managerEmail: user.email,
     };
 
-    const res = await fetch("http://localhost:5000/productsData", {
+    const res = await fetch("https://garment-track-server-zeta.vercel.app/productsData", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -90,7 +90,8 @@ const AddProduct = () => {
   return (
     <div className="p-6 max-w-xl mx-auto">
       <h2 className="text-2xl text-center md:text-4xl font-extrabold mb-6
-          bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))] bg-clip-text text-transparent" >
+          bg-[linear-gradient(90deg,rgba(248,54,0,1),rgba(249,212,35,1))]
+          bg-clip-text text-transparent" >
         Add New Product
       </h2>
 
@@ -145,7 +146,7 @@ const AddProduct = () => {
             <option>Pant</option>
             <option>Jacket</option>
             <option>Accessories</option>
-            <option>Kameez</option>
+            <option>Hoodie</option>
             <option>Kids Pant</option>
             <option>Woman's Pant</option>
           </select>
@@ -177,7 +178,7 @@ const AddProduct = () => {
 
         {/* MOQ */}
         <div>
-          <label className="label font-semibold">Minimum Order Quantity (MOQ)</label>
+          <label className="label font-semibold ">Minimum Order Quantity</label>
           <input
             type="number"
             name="minimumOrderQuantity"
@@ -189,7 +190,7 @@ const AddProduct = () => {
 
         {/* Demo Video */}
         <div>
-          <label className="label font-semibold">Demo Video Link (optional)</label>
+          <label className="label font-semibold">Demo Video Link(optional)</label>
           <input
             type="text"
             name="demoVideo"

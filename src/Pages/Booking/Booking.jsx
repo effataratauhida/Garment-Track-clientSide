@@ -14,7 +14,7 @@ const Booking = () => {
 
   // product details
   useEffect(() => {
-    fetch(`http://localhost:5000/productsData/${id}`)
+    fetch(`https://garment-track-server-zeta.vercel.app/productsData/${id}`)
       .then(res => res.json())
       .then(data => {
         setProduct(data);
@@ -65,7 +65,7 @@ const Booking = () => {
       createdAt: new Date(),
     };
 
-    const res = await fetch("http://localhost:5000/orders", {
+    const res = await fetch("https://garment-track-server-zeta.vercel.app/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(orderData),

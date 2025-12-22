@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 const DeleteModalManager = ({ product, setProducts, onClose }) => {
   const handleDelete = async () => {
     const res = await fetch(
-      `http://localhost:5000/productsData/${product._id}`,
+      `https://garment-track-server-zeta.vercel.app/productsData/${product._id}`,
       {
         method: "DELETE",
         credentials: "include",

@@ -69,8 +69,8 @@ const Navbar = () => {
                  </ul>
                     </div>
                     <Link to='/' className="flex items-center  hover:scale-105 ">
-                    <HiScissors className='h-7 w-7' />
-                    <h2 className='text-gray-800 font-bold text-2xl'>
+                    <HiScissors className='md:h-7 md:w-7 w-5 h-5' />
+                    <h2 className='text-gray-800 font-bold text-xl md:text-2xl'>
                      Garment<span className='text-[#F83600]'>Track</span>
                     </h2>
                      
@@ -125,7 +125,7 @@ const Navbar = () => {
                       <div className="flex items-center gap-3">
                     
                         {/* User Avatar */}
-                        <div className="w-10 h-10 rounded-full overflow-hidden border">
+                        <div className="md:w-10 md:h-10 w-8 h-8 rounded-full overflow-hidden border">
                           {
                             user.photoURL
                               ? (

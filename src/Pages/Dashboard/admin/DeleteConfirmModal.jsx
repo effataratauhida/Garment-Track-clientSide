@@ -4,7 +4,7 @@ const DeleteConfirmModal = ({ product, setProducts, onClose }) => {
 
 
   const handleDelete = async () => {
-  const res = await fetch(`http://localhost:5000/productsData/${product._id}`, {
+  const res = await fetch(`https://garment-track-server-zeta.vercel.app/productsData/${product._id}`, {
     method: "DELETE",
     credentials: "include",
   });

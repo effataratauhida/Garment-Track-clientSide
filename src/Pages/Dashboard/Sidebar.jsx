@@ -6,9 +6,14 @@ import { HiScissors } from "react-icons/hi";
 
 const Sidebar = () => {
 
-  const { role } = useContext(AuthContext);
+  const { role , loading } = useContext(AuthContext);
   
   //console.log("SIDEBAR ROLE", role);
+if (loading) {
+  return <div className="p-4">Loading...</div>;
+}
+
+
 
   const roleLabel = role
   ? role.charAt(0).toUpperCase() + role.slice(1)
@@ -98,7 +103,7 @@ const Sidebar = () => {
             : "transparent",
           color: isActive ? "white" : "#F83600",
           fontWeight: isActive ? "600" : "500",
-           padding: "6px 32px",
+           padding: "3px 10px",
           borderRadius: "18px",
         })}
         className="block "

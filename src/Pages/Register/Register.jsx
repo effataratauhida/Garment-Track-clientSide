@@ -54,10 +54,10 @@ const Registration = () => {
         photoURL: photoURL
       });
 
-      setUser({ ...user, displayName: name, photoURL });
+      //setUser({ ...user, displayName: name, photoURL });
 
       // Save user to DB
-      await fetch("http://localhost:5000/users", {
+      await fetch("https://garment-track-server-zeta.vercel.app/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -86,7 +86,7 @@ const Registration = () => {
       setUser(user);
 
       // Save Google user
-      await fetch("http://localhost:5000/users", {
+      await fetch("https://garment-track-server-zeta.vercel.app/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

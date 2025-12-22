@@ -17,7 +17,7 @@ const UpdateUserModal = ({ user, setShowModal, setUsers }) => {
 
     setLoading(true);
 
-    const res = await fetch(`http://localhost:5000/users/${user._id}`, {
+    const res = await fetch(`https://garment-track-server-zeta.vercel.app/users/${user._id}`, {
       method: "PATCH",
       credentials: "include",
       headers: {
